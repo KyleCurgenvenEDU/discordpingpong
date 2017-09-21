@@ -11,7 +11,6 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    //let msgContent = 
     if(message.content.toLowerCase()==='ping'){
         message.channel.send('pong');
     }
