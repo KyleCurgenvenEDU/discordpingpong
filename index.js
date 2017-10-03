@@ -7,8 +7,8 @@ const client = new Discord.Client();
 
 const token = Token.mytoken;
 client.on('ready', () => {
-   console.log('I am ready!');
-//    console.log();
+    console.log('I am ready!');
+      
     
 });
 client.on('message', message => {
@@ -24,25 +24,8 @@ client.on('message', message => {
     }
     //experimentation
     // console.log(client.guilds);
-    console.log(`${message.author.username} sent a message in: ${message.channel.name}`);
-});
-
-// console.log(client.channels);
-// let userName = client.users.get('218553725000744961');
-// console.log(userName);
-
-// guildMemberUpdate working
-client.on('guildMemberUpdate', () =>{
-    console.log(`guild memeber updated`);
-});
-
-
-// client.on('guildMemberAdd', () => {
-//     console.log(`test`);
-// });
-
-client.on('guildMemberAvailable', () => {
-    console.log(`guild member online`);
+    // console.log(`${message.author.username} sent a message in: ${message.channel.name}`);
+    // console.log(client.users.find(username));
 });
 
 //logs event when server is updated
@@ -50,6 +33,40 @@ client.on('guildUpdate', guildUpdate =>{
     console.log('Server updated');
 });
 
+// guildMemberUpdate working
+client.on('guildMemberUpdate', (newMember, oldMember) =>{
+    // let theId = newMember.id;
+    if (oldMember.nickname === null){
+        console.log(oldMember.username);
+    }else{
+        console.log(oldMember.nickname);
+    }
+    console.log(newMember.nickname);
+    // console.log(client.users.get(theId).username);
+    // console.log(client.users.get('218553725000744961'));
+    console.log(`guild memeber updated. it is ${newMember.nickname}`);
+});
+
+
+// console.log(client.channels);
+// let userName = client.users.get('218553725000744961');
+// console.log(userName);
+
+
+client.on("guildMemberAdd", (member) => {
+    let serverName = member.guild;
+    console.log();
+    // console.log(serverName.channels("name", "general").id);
+    //will only report default channel not entered channel.
+    
+    // serverName.channels.get(serverName.systemChannel.id);
+
+    member.send(`${member.displayName} welcome the ${serverName.systemChannel.name} channel on server: ${serverName}.`).catch(console.error);
+    console.log(`${member.displayName} welcome the ${serverName.systemChannel.name} channel on server: ${serverName}.`);
+});   
+
+
+//######################################################################
 client.login(token);
 
 //=============
