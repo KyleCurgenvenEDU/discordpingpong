@@ -58,10 +58,10 @@ client.on("guildMemberAdd", (member) => {
     console.log();
     // console.log(serverName.channels("name", "general").id);
     //will only report default channel not entered channel.
+    let generalChan = client.channels.get(serverName.systemChannelID);
+    generalChan.send(`${member.displayName} welcome the ${serverName.systemChannel.name} channel on server: ${serverName}.`)
+                    .catch(console.error);
     
-    // serverName.channels.get(serverName.systemChannel.id);
-
-    member.send(`${member.displayName} welcome the ${serverName.systemChannel.name} channel on server: ${serverName}.`).catch(console.error);
     console.log(`${member.displayName} welcome the ${serverName.systemChannel.name} channel on server: ${serverName}.`);
 });   
 
